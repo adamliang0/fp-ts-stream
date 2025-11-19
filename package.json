@@ -1,55 +1,22 @@
 {
 	"name": "fp-ts-stream",
-	"version": "0.1.14",
+	"version": "0.1.18",
 	"description": "A library providing async and sync streams for fp-ts.",
 	"exports": {
 		".": {
 			"require": {
-				"types": "./dist/cjs/index.d.ts",
-				"default": "./dist/cjs/index.js"
+				"types": "./dist/index.d.ts",
+				"default": "./dist/index.js"
 			},
 			"import": {
-				"types": "./dist/esm/index.d.ts",
-				"default": "./dist/esm/index.js"
-			}
-		},
-		"./Stream": {
-			"require": {
-				"types": "./dist/cjs/Stream/index.d.ts",
-				"default": "./dist/cjs/Stream/index.js"
-			},
-			"import": {
-				"types": "./dist/esm/Stream/index.d.ts",
-				"default": "./dist/esm/Stream/index.js"
-			}
-		},
-		"./AsyncStream": {
-			"require": {
-				"types": "./dist/cjs/AsyncStream/index.d.ts",
-				"default": "./dist/cjs/AsyncStream/index.js"
-			},
-			"import": {
-				"types": "./dist/esm/AsyncStream/index.d.ts",
-				"default": "./dist/esm/AsyncStream/index.js"
+				"types": "./dist/index.d.ts",
+				"default": "./dist/index.mjs"
 			}
 		}
 	},
-	"typesVersions": {
-		"*": {
-			"index": [
-				"dist/cjs/index.d.ts"
-			],
-			"Stream": [
-				"dist/cjs/Stream/index.d.ts"
-			],
-			"AsyncStream": [
-				"dist/cjs/AsyncStream/index.d.ts"
-			]
-		}
-	},
-	"types": "dist/cjs/index.d.ts",
-	"module": "dist/esm/index.js",
-	"main": "dist/cjs/index.js",
+	"types": "dist/index.d.ts",
+	"module": "dist/index.mjs",
+	"main": "dist/index.js",
 	"sideEffects": false,
 	"scripts": {
 		"test": "vitest",
@@ -69,7 +36,7 @@
 	},
 	"homepage": "https://github.com/adamliang0/fp-ts-stream#readme",
 	"peerDependencies": {
-		"fp-ts": ">= 2.12.0"
+		"fp-ts": "^2.16.11"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^2.3.6",
@@ -79,6 +46,7 @@
 		"@rsbuild/plugin-node-polyfill": "^1.4.2",
 		"@rslib/core": "^0.18.0",
 		"@typescript/native-preview": "^7.0.0-dev.20251119.1",
+		"@vitest/coverage-v8": "4.0.10",
 		"husky": "^9.1.7",
 		"release-it": "*",
 		"typescript": "5.9.3",

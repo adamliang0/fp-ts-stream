@@ -1,0 +1,32 @@
+{
+	"compilerOptions": {
+		"module": "ES2022",
+		"target": "ES2022",
+		"declaration": true,
+		"declarationMap": true,
+		"outDir": "dist",
+		"strict": true,
+		"alwaysStrict": true,
+		"noImplicitAny": true,
+		"noImplicitThis": true,
+		"strictFunctionTypes": true,
+		"strictBindCallApply": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"noImplicitReturns": true,
+		"noFallthroughCasesInSwitch": true,
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+		"skipLibCheck": true,
+		"moduleResolution": "Bundler",
+		"importHelpers": false,
+		"isolatedModules": true,
+		"resolveJsonModule": true,
+		"downlevelIteration": true,
+
+		"paths": {
+			"@/*": ["./src/*"],
+			"@/tests/*": ["./tests/*"]
+		}
+	}
+}

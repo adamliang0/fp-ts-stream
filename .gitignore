@@ -5,3 +5,7 @@ dist
 release.sh
 launch.json
 .release-it.json
+CLAUDE.md
+.claude
+.rslib
+.vscode/coverage

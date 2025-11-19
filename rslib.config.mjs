@@ -4,20 +4,23 @@ export default {
 	lib: [
 		{
 			format: "esm",
-			syntax: "esnext",
+			syntax: "es2022",
 			autoExternal: true,
 			name: "[name].esm.mjs",
 			dts: { bundle: true, tsgo: true },
 		},
 		{
 			format: "cjs",
+			syntax: "es2022",
 			autoExternal: true,
 			name: "[name].cjs.mjs",
-			syntax: "esnext",
 			dts: { bundle: true, tsgo: true },
 		},
 	],
 	input: "src/index.ts",
+	source: {
+		tsconfigPath: "./tsconfig.json",
+	},
 	output: {
 		target: "web",
 		minify: true,
@@ -30,8 +33,4 @@ export default {
 	},
 	plugins: [pluginNodePolyfill()],
 	external: ["fp-ts/*"],
-	clean: true,
-	minify: false,
-	sourcemap: true,
-	tsconfig: "./tsconfig.json",
 };

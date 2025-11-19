@@ -1,12 +1,23 @@
+import { fileURLToPath } from "node:url";
 import { defineConfig } from "vitest/config";
 
 export default defineConfig({
+	resolve: {
+		alias: {
+			"@": fileURLToPath(new URL("./src", import.meta.url)),
+		},
+	},
 	test: {
 		environment: "node",
 		globals: true,
+		setupFiles: ["tests/setup.ts"],
 		coverage: {
-			reporter: ["text", "html"],
+			reporter: ["text", "json"],
 		},
-		include: ["src/**/*.test.ts", "src/**/*.spec.ts"],
+		include: ["tests/**/*.test.ts"],
+		root: ".",
+		typecheck: {
+			tsconfig: "tsconfig.vitest.json",
+		},
 	},
 });
