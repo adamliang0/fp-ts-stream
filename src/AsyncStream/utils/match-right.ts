@@ -49,7 +49,12 @@ export function matchRightW<B, A, C>(
 				return await onEmpty();
 			} else {
 				const init = await toArray(fa);
-				const last = init.pop()!;
+				const last = init.pop();
+
+				if (!last) {
+					return await onEmpty();
+				}
+
 				return await onNonEmpty(fromIterable(init), last);
 			}
 		};

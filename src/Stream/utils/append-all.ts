@@ -1,4 +1,4 @@
-import { Stream } from "../uri";
+import type { Stream } from "../uri";
 
 /**
  * Appends an element to every member of a {@link Stream}.

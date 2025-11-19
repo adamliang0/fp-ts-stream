@@ -1,4 +1,4 @@
-import { AsyncStream } from "./uri";
+import type { AsyncStream } from "./uri";
 
 /**
  * Concatenates two {@link AsyncStream}s into one.

@@ -1,4 +1,4 @@
-import { Stream } from "../uri";
+import type { Stream } from "../uri";
 
 /**
  * Less strict version of {@link prepend}.

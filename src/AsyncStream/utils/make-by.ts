@@ -1,4 +1,4 @@
-import { AsyncStream } from "../uri";
+import type { AsyncStream } from "../uri";
 
 /**
  * Returns an {@link AsyncStream} of length `n` with element `i` initialized

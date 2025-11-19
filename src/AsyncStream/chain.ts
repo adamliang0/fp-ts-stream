@@ -180,7 +180,10 @@ export function chainRecBreadthFirst<A, B>(
 
 			yield* go(f(a));
 			while (todo.length > 0) {
-				const fa = todo.shift()!;
+				const fa = todo.shift();
+				if (!fa) {
+					continue;
+				}
 				yield* go(fa);
 			}
 		};

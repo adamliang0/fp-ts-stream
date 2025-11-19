@@ -1,4 +1,4 @@
-import { AsyncStream } from "../uri";
+import type { AsyncStream } from "../uri";
 
 /**
  * Same as `reduce` but it carries over the intermediate steps.

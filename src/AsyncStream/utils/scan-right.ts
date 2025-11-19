@@ -1,5 +1,5 @@
 import { toArray } from "../conversions";
-import { AsyncStream } from "../uri";
+import type { AsyncStream } from "../uri";
 
 /**
  * Fold an {@link AsyncStream} from the right, keeping all intermediate results

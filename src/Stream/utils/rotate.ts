@@ -35,7 +35,7 @@ export function rotate(n: number) {
 	 * @__PURE__
 	 */
 	return function _rotate<A>(fa: Stream<A>): Stream<A> {
-		if (n == 0) return fa;
+		if (n === 0) return fa;
 		if (n < 0) {
 			return pipe(fa, toArray, arrayRotate(n), fromIterable);
 		}

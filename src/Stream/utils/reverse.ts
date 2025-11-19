@@ -1,5 +1,5 @@
 import { fromIterable, toArray } from "../conversions";
-import { Stream } from "../uri";
+import type { Stream } from "../uri";
 
 /**
  * Reverses a {@link Stream} and returns another one.

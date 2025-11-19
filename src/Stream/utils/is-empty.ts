@@ -1,4 +1,4 @@
-import { Stream } from "../uri";
+import type { Stream } from "../uri";
 
 /**
  * Tests whether a {@link Stream} is empty.

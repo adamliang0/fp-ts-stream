@@ -1,4 +1,4 @@
-import { Stream } from "../uri";
+import type { Stream } from "../uri";
 
 /**
  * Drops/skips the given amount of items from a {@link Stream}.

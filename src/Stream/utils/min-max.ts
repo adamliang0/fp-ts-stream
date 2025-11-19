@@ -1,4 +1,4 @@
-import { none, Option, some } from "fp-ts/Option";
+import { none, type Option, some } from "fp-ts/Option";
 
 import type { Ord } from "fp-ts/Ord";
 
@@ -27,7 +27,7 @@ export function minimum<A>(ord: Ord<A>) {
 	 * @__PURE__
 	 */
 	return function _minimum(xs: Stream<A>): Option<A> {
-		let gen = xs();
+		const gen = xs();
 
 		let { value: lhs, done } = gen.next();
 		if (done) return none;
@@ -65,7 +65,7 @@ export function maximum<A>(ord: Ord<A>) {
 	 * @__PURE__
 	 */
 	return function _maximum(xs: Stream<A>): Option<A> {
-		let gen = xs();
+		const gen = xs();
 
 		let { value: lhs, done } = gen.next();
 		if (done) return none;

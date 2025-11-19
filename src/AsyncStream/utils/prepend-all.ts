@@ -1,4 +1,4 @@
-import { AsyncStream } from "../uri";
+import type { AsyncStream } from "../uri";
 
 /**
  * Prepends an element to every member of an {@link AsyncStream}.

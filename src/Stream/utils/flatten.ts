@@ -1,4 +1,4 @@
-import { Stream } from "../uri";
+import type { Stream } from "../uri";
 
 /**
  * Takes a {@link Stream} of {@link Stream}s of `A` and flattens them into

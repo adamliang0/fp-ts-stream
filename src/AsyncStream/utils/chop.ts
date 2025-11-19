@@ -1,4 +1,4 @@
-import { AsyncStream } from "../uri";
+import type { AsyncStream } from "../uri";
 import { prepend } from "./prepend";
 
 /**

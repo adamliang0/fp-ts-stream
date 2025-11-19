@@ -65,6 +65,7 @@ export function dropRightWhile<A>(
 	predicate: AsyncPredicate<A>,
 ): (fa: AsyncStream<A>) => AsyncStream<A> {
 	return function _dropRightWhile(fa) {
+		// biome-ignore lint/correctness/useYield: fromIterable holds yield in its function definition
 		return async function* __dropRightWhile() {
 			const array = await toArray(fa);
 			for (let i = array.length - 1; i >= 0; --i) {

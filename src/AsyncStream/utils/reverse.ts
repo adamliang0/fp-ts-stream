@@ -1,5 +1,5 @@
 import { toArray } from "../conversions";
-import { AsyncStream } from "../uri";
+import type { AsyncStream } from "../uri";
 
 /**
  * Reverses an {@link AsyncStream} and returns another one.

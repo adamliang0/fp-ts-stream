@@ -1,5 +1,5 @@
-import { AsyncStream } from "../uri";
-import { MaybeAsync } from "./maybe-async";
+import type { AsyncStream } from "../uri";
+import type { MaybeAsync } from "./maybe-async";
 
 /**
  * Given an input an {@link AsyncStream} of functions, `flap` returns

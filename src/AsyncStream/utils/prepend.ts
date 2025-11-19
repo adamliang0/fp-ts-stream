@@ -1,4 +1,4 @@
-import { AsyncStream } from "../uri";
+import type { AsyncStream } from "../uri";
 
 /**
  * Less strict version of {@link prepend}.

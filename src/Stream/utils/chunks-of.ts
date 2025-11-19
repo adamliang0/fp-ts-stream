@@ -1,5 +1,5 @@
 import { of } from "../pointed";
-import { Stream } from "../uri";
+import type { Stream } from "../uri";
 
 /**
  * Splits a {@link Stream} into {@link Stream} of {@link Streams} of given

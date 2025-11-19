@@ -1,4 +1,4 @@
-import { AsyncStream } from "../uri";
+import type { AsyncStream } from "../uri";
 
 /**
  * Places an element in between members of an {@link AsyncStream}.
@@ -25,7 +25,7 @@ export function intersperse<A>(middle: A) {
 	return function _intersperse(fa: AsyncStream<A>): AsyncStream<A> {
 		return async function* __intersperse() {
 			const gen = fa();
-			let curr = await gen.next();
+			const curr = await gen.next();
 
 			if (curr.done) return;
 			yield curr.value;

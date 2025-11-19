@@ -1,5 +1,5 @@
-import { AsyncStream } from "../uri";
-import { AsyncPredicate } from "./async-predicate";
+import type { AsyncStream } from "../uri";
+import type { AsyncPredicate } from "./async-predicate";
 
 /**
  * Check if a predicate holds true for any {@link AsyncStream} member.

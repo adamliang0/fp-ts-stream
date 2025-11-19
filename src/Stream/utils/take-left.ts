@@ -33,7 +33,7 @@ export function takeLeft(count: number) {
 				yield a;
 				--count;
 
-				if (count == 0) break;
+				if (count === 0) break;
 			}
 		};
 	};

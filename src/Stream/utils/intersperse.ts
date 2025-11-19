@@ -1,4 +1,4 @@
-import { Stream } from "../uri";
+import type { Stream } from "../uri";
 
 /**
  * Places an element in between members of a {@link Stream}.
@@ -25,7 +25,7 @@ export function intersperse<A>(middle: A) {
 	return function _intersperse(fa: Stream<A>): Stream<A> {
 		return function* __intersperse() {
 			const gen = fa();
-			let curr = gen.next();
+			const curr = gen.next();
 
 			if (curr.done) return;
 			yield curr.value;

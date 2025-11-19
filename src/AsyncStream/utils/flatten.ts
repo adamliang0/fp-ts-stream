@@ -1,4 +1,4 @@
-import { AsyncStream } from "../uri";
+import type { AsyncStream } from "../uri";
 
 /**
  * Flattens an {@link AsyncStream} of {@link AsyncStream}s into

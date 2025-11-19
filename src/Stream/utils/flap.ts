@@ -1,4 +1,4 @@
-import { Stream } from "../uri";
+import type { Stream } from "../uri";
 
 /**
  * Given an input a {@link Stream} of functions, `flap` returns a {@link Stream}

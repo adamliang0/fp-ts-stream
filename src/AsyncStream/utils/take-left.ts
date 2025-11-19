@@ -1,4 +1,4 @@
-import { AsyncStream } from "../uri";
+import type { AsyncStream } from "../uri";
 import { empty } from "../zero";
 
 /**
@@ -35,7 +35,7 @@ export function takeLeft(count: number) {
 				yield a;
 				--count;
 
-				if (count == 0) break;
+				if (count === 0) break;
 			}
 		};
 	};

@@ -1,5 +1,5 @@
 import { toArray } from "../conversions";
-import { AsyncStream } from "../uri";
+import type { AsyncStream } from "../uri";
 
 /**
  * Takes given amount of items from an {@link AsyncStream} from the end to the

@@ -1,7 +1,7 @@
 import { fromIterable } from "../../Stream/conversions";
-import { Stream } from "../../Stream/uri";
+import type { Stream } from "../../Stream/uri";
 import { of } from "../pointed";
-import { AsyncStream } from "../uri";
+import type { AsyncStream } from "../uri";
 import { zero } from "../zero";
 
 /**

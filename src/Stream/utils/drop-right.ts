@@ -22,7 +22,7 @@ import { take } from "./take-left";
  */
 export function dropRight(count: number) {
 	if (count < 0) return take(-count);
-	else if (count == 0) return identity;
+	else if (count === 0) return identity;
 
 	/**
 	 * Skips the previously given amount of elements from the given {@link Stream}
