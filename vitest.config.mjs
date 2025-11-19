@@ -8,6 +8,7 @@ export default defineConfig({
 		},
 	},
 	test: {
+		root: ".",
 		environment: "node",
 		globals: true,
 		setupFiles: ["tests/setup.ts"],
@@ -15,7 +16,6 @@ export default defineConfig({
 			reporter: ["text", "json"],
 		},
 		include: ["tests/**/*.test.ts"],
-		root: ".",
 		typecheck: {
 			tsconfig: "tsconfig.vitest.json",
 		},

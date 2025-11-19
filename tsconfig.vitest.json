@@ -1,9 +1,17 @@
 {
 	"extends": "./tsconfig.base.json",
 	"compilerOptions": {
-		"composite": true,
-		"noEmit": false
+		"module": "ESNext",
+		"target": "esnext",
+		"noEmit": false,
+		"paths": {
+			"@/*": ["./src/*"]
+		},
+		"jsx": "preserve",
+		"lib": ["esnext"],
+		"moduleResolution": "bundler"
 	},
 	"include": ["./tests/**/*.ts", "./src/**/*.ts"],
-	"exclude": ["dist", "node_modules"]
+	"exclude": ["dist", "node_modules"],
+	"references": [{ "path": "./tsconfig.json" }]
 }

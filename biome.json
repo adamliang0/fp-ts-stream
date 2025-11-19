@@ -1,5 +1,9 @@
 {
 	"$schema": "https://biomejs.dev/schemas/2.3.6/schema.json",
+
+	"files": {
+		"includes": ["**", "!dist", "!node_modules"]
+	},
 	"formatter": {
 		"formatWithErrors": false,
 		"attributePosition": "auto",
@@ -10,6 +14,11 @@
 	},
 	"linter": {
 		"enabled": true,
+		"rules": {
+			"complexity": {
+				"noCommaOperator": "off"
+			}
+		},
 		"includes": ["**", "!**/*.test.ts", "!**/*.spec.ts"]
 	},
 	"javascript": {

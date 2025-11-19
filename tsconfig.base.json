@@ -16,17 +16,17 @@
 		"noImplicitReturns": true,
 		"noFallthroughCasesInSwitch": true,
 		"esModuleInterop": true,
+		"allowImportingTsExtensions": false,
 		"forceConsistentCasingInFileNames": true,
 		"skipLibCheck": true,
-		"moduleResolution": "Bundler",
+		"moduleResolution": "bundler",
+		"jsx": "preserve",
 		"importHelpers": false,
 		"isolatedModules": true,
 		"resolveJsonModule": true,
 		"downlevelIteration": true,
-
 		"paths": {
-			"@/*": ["./src/*"],
-			"@/tests/*": ["./tests/*"]
+			"@/*": ["./src/*"]
 		}
 	}
 }
