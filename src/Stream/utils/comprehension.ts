@@ -14,7 +14,7 @@ type UnwrapOutputs<
 	: Output;
 
 type OutputMapper<T extends ReadonlyArray<Stream<unknown>>, R> = (
-	...args: [...UnwrapOutputs<T>]
+	...args: UnwrapOutputs<T>
 ) => R;
 
 type Condition<T extends ReadonlyArray<Stream<unknown>>> = OutputMapper<
@@ -44,30 +44,38 @@ export function comprehension<
 	I extends ReadonlyNonEmptyArray<Stream<unknown>>,
 >(input: I, f: OutputMapper<I, R>, g?: Condition<I>): Stream<R> {
 	return function* _comprehension() {
-		g ??= constTrue;
+		type Args = UnwrapOutputs<I>;
+
+		// No union / inference weirdness: both branches are Condition<I>
+		const guard: Condition<I> = g ? g : (..._xs: Args) => constTrue();
 
 		function* go(
-			mas: Stream<unknown>[],
-			collected: Array<unknown>,
-			depth = 0,
+			streams: ReadonlyArray<Stream<unknown>>,
+			collected: Args,
+			depth: number,
 		): Generator<R> {
-			if (mas.length === 1) {
-				const ma = mas[0];
-				for (const a of ma()) {
-					collected[depth] = a;
-					if (g!(...(collected as any))) {
-						yield f(...(collected as any));
-					}
+			if (streams.length === 0) {
+				if (guard(...collected)) {
+					yield f(...collected);
 				}
-			} else {
-				const ma = mas.shift()!;
-				for (const a of ma()) {
-					collected[depth] = a;
-					yield* go(mas, collected, depth + 1);
-				}
+				return;
+			}
+
+			const [head, ...tail] = streams;
+
+			for (const a of head()) {
+				// TS still can’t track which stream corresponds to which index,
+				// so we localize the unsafety to these two assertions.
+				collected[depth as keyof Args] = a as Args[number];
+				yield* go(tail, collected, depth + 1);
 			}
 		}
 
-		yield* go([...input], new Array(input.length));
+		// Single localized cast from an `unknown[]` to the tuple type
+		const collected = new Array(input.length).fill(
+			undefined,
+		) as unknown as Args;
+
+		yield* go(input, collected, 0);
 	};
 }

@@ -15,7 +15,7 @@ type UnwrapOutputs<
 	: Output;
 
 type OutputMapper<T extends ReadonlyArray<AsyncStream<unknown>>, R> = (
-	...args: [...UnwrapOutputs<T>]
+	...args: UnwrapOutputs<T>
 ) => MaybeAsync<R>;
 
 type Condition<T extends ReadonlyArray<AsyncStream<unknown>>> = OutputMapper<
@@ -45,31 +45,40 @@ export function comprehension<
 	I extends ReadonlyNonEmptyArray<AsyncStream<unknown>>,
 >(input: I, f: OutputMapper<I, R>, g?: Condition<I>): AsyncStream<R> {
 	return async function* _comprehension() {
-		g ??= constTrue;
+		type Args = UnwrapOutputs<I>;
+
+		// Make sure the default is seen as a Condition<I>
+		const guard: Condition<I> = (g ??
+			((..._xs: Args) => constTrue())) as Condition<I>;
 
 		async function* go(
-			mas: AsyncStream<unknown>[],
-			collected: Array<unknown>,
-			depth = 0,
+			streams: ReadonlyArray<AsyncStream<unknown>>,
+			collected: Args,
+			depth: number,
 		): AsyncGenerator<R> {
-			if (mas.length === 1) {
-				const ma = mas[0];
-				for await (const a of ma()) {
-					collected[depth] = a;
-					const condition = await g!(...(collected as any));
-					if (condition) {
-						yield await f(...(collected as any));
-					}
+			if (streams.length === 0) {
+				if (await guard(...collected)) {
+					const r = await f(...collected);
+					yield r;
 				}
-			} else {
-				const ma = mas.shift()!;
-				for await (const a of ma()) {
-					collected[depth] = a;
-					yield* go(mas, collected, depth + 1);
-				}
+				return;
+			}
+
+			const [head, ...tail] = streams;
+
+			for await (const a of head()) {
+				// TS can’t track that depth is a valid index for Args,
+				// so we narrow index and value only.
+				collected[depth as keyof Args] = a as Args[number];
+				yield* go(tail, collected, depth + 1);
 			}
 		}
 
-		yield* go([...input], new Array(input.length));
+		// Initialize the tuple we’ll fill as we traverse the streams
+		const collected = new Array(input.length).fill(
+			undefined,
+		) as unknown as Args;
+
+		yield* go(input, collected, 0);
 	};
 }
