@@ -1,5 +1,5 @@
-import type { IO } from "fp-ts/IO";
 import { pipe } from "fp-ts/function";
+import type { IO } from "fp-ts/IO";
 import { describe, expect, it, vi } from "vitest";
 
 import { toArray } from "@/Stream/conversions";

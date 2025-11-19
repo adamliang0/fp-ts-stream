@@ -1,7 +1,6 @@
 import { describe, expect, it } from "vitest";
-
-import { fromIterable as fromSyncIterable } from "@/Stream/conversions";
 import { fromStream } from "@/AsyncStream/transformations/from-stream";
+import { fromIterable as fromSyncIterable } from "@/Stream/conversions";
 
 import { collect } from "../helpers";
 

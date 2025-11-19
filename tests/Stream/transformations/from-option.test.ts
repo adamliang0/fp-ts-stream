@@ -1,5 +1,5 @@
-import * as O from "fp-ts/Option";
 import { pipe } from "fp-ts/function";
+import * as O from "fp-ts/Option";
 import { describe, expect, it } from "vitest";
 
 import { toArray } from "@/Stream/conversions";

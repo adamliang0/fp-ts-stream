@@ -25,10 +25,7 @@ describe("Stream/applicative", () => {
 		it("applies each function to each value", () => {
 			const values = pipe(fromIterable([1, 2, 3]));
 			const functions = pipe(
-				fromIterable([
-					(x: number) => x * 2,
-					(x: number) => x + 10,
-				]),
+				fromIterable([(x: number) => x * 2, (x: number) => x + 10]),
 			);
 
 			const result = pipe(values, ap, (apFn) => apFn(functions), toArray);
@@ -153,18 +150,19 @@ describe("Stream/applicative", () => {
 				x,
 				ap,
 				(apFn) =>
-					apFn(
-						pipe(
-							of(g),
-							ap,
-							(apFn2) => apFn2(pipe(of(f), map(compose))),
-						),
-					),
+					apFn(pipe(of(g), ap, (apFn2) => apFn2(pipe(of(f), map(compose))))),
 				toArray,
 			);
 
 			// Right side: ap(f)(ap(g)(x))
-			const right = pipe(x, ap, (apFn) => apFn(of(g)), ap, (apFn2) => apFn2(of(f)), toArray);
+			const right = pipe(
+				x,
+				ap,
+				(apFn) => apFn(of(g)),
+				ap,
+				(apFn2) => apFn2(of(f)),
+				toArray,
+			);
 
 			expect(left).toEqual(right);
 		});
