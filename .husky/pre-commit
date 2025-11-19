@@ -1,0 +1,2 @@
+bunx vitest run || exit 1
+bunx @biome/biome check . --write || exit 1
