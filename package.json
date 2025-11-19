@@ -1,92 +1,88 @@
 {
-  "name": "fp-ts-stream",
-  "version": "0.1.11",
-  "description": "A library providing async and sync streams for fp-ts.",
-  "exports": {
-    ".": {
-      "require": {
-        "types": "./dist/cjs/index.d.ts",
-        "default": "./dist/cjs/index.js"
-      },
-      "import": {
-        "types": "./dist/esm/index.d.ts",
-        "default": "./dist/esm/index.js"
-      }
-    },
-    "./Stream": {
-      "require": {
-        "types": "./dist/cjs/Stream/index.d.ts",
-        "default": "./dist/cjs/Stream/index.js"
-      },
-      "import": {
-        "types": "./dist/esm/Stream/index.d.ts",
-        "default": "./dist/esm/Stream/index.js"
-      }
-    },
-    "./AsyncStream": {
-      "require": {
-        "types": "./dist/cjs/AsyncStream/index.d.ts",
-        "default": "./dist/cjs/AsyncStream/index.js"
-      },
-      "import": {
-        "types": "./dist/esm/AsyncStream/index.d.ts",
-        "default": "./dist/esm/AsyncStream/index.js"
-      }
-    }
-  },
-  "typesVersions": {
-    "*": {
-      "index": [
-        "dist/cjs/index.d.ts"
-      ],
-      "Stream": [
-        "dist/cjs/Stream/index.d.ts"
-      ],
-      "AsyncStream": [
-        "dist/cjs/AsyncStream/index.d.ts"
-      ]
-    }
-  },
-  "types": "dist/cjs/index.d.ts",
-  "module": "dist/esm/index.js",
-  "main": "dist/cjs/index.js",
-  "sideEffects": false,
-  "scripts": {
-    "test": "jest",
-    "prepublish": "tsc -p tsconfig.json && tsc -p tsconfig-cjs.json",
-    "build": "rm -rf dist/* && tsc -p tsconfig.json && tsc -p tsconfig-cjs.json",
-    "build-watch": "tsc --watch",
-    "release": "release-it"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/incetarik/fp-ts-stream.git"
-  },
-  "author": "Tarik Ince <incetarik@hotmail.com>",
-  "license": "SEE LICENSE IN LICENSE",
-  "bugs": {
-    "url": "https://github.com/incetarik/fp-ts-stream/issues"
-  },
-  "homepage": "https://github.com/incetarik/fp-ts-stream#readme",
-  "peerDependencies": {
-    "fp-ts": ">= 2.12.0",
-    "tslib": ">= 2.4"
-  },
-  "devDependencies": {
-    "typescript": "4.8.4",
-    "release-it": "*"
-  },
-  "tags": [
-    "streaming",
-    "functional-programming",
-    "fp-ts",
-    "generators"
-  ],
-  "keywords": [
-    "stream",
-    "streaming",
-    "functional-programming",
-    "fp-ts",
-    "generators"
-  ]
+	"name": "fp-ts-stream",
+	"version": "0.1.12",
+	"description": "A library providing async and sync streams for fp-ts.",
+	"exports": {
+		".": {
+			"require": {
+				"types": "./dist/cjs/index.d.ts",
+				"default": "./dist/cjs/index.js"
+			},
+			"import": {
+				"types": "./dist/esm/index.d.ts",
+				"default": "./dist/esm/index.js"
+			}
+		},
+		"./Stream": {
+			"require": {
+				"types": "./dist/cjs/Stream/index.d.ts",
+				"default": "./dist/cjs/Stream/index.js"
+			},
+			"import": {
+				"types": "./dist/esm/Stream/index.d.ts",
+				"default": "./dist/esm/Stream/index.js"
+			}
+		},
+		"./AsyncStream": {
+			"require": {
+				"types": "./dist/cjs/AsyncStream/index.d.ts",
+				"default": "./dist/cjs/AsyncStream/index.js"
+			},
+			"import": {
+				"types": "./dist/esm/AsyncStream/index.d.ts",
+				"default": "./dist/esm/AsyncStream/index.js"
+			}
+		}
+	},
+	"typesVersions": {
+		"*": {
+			"index": [
+				"dist/cjs/index.d.ts"
+			],
+			"Stream": [
+				"dist/cjs/Stream/index.d.ts"
+			],
+			"AsyncStream": [
+				"dist/cjs/AsyncStream/index.d.ts"
+			]
+		}
+	},
+	"types": "dist/cjs/index.d.ts",
+	"module": "dist/esm/index.js",
+	"main": "dist/cjs/index.js",
+	"sideEffects": false,
+	"scripts": {
+		"test": "vitest",
+		"build": "rslib build",
+		"dev": "rslib build --watch",
+		"release": "release-it",
+		"prepare": "husky"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/adamliang0/fp-ts-stream.git"
+	},
+	"author": "Adam Liang <hello@adamliang.dev>",
+	"license": "SEE LICENSE IN LICENSE",
+	"bugs": {
+		"url": "https://github.com/adamliang0/fp-ts-stream/issues"
+	},
+	"homepage": "https://github.com/adamliang0/fp-ts-stream#readme",
+	"peerDependencies": {
+		"fp-ts": ">= 2.12.0"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^2.3.6",
+		"@commitlint/cli": "^20.1.0",
+		"@commitlint/config-conventional": "^20.0.0",
+		"@microsoft/api-extractor": "^7.55.0",
+		"@rsbuild/plugin-node-polyfill": "^1.4.2",
+		"@rslib/core": "^0.18.0",
+		"@typescript/native-preview": "^7.0.0-dev.20251119.1",
+		"husky": "^9.1.7",
+		"release-it": "*",
+		"typescript": "5.9.3",
+		"vitest": "^4.0.10"
+	},
+	"packageManager": "bun@1.3.2"
 }
