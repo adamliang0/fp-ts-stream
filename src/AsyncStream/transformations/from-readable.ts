@@ -1,4 +1,4 @@
-import { AsyncStream } from "../uri";
+import type { AsyncStream } from "../uri";
 
 /**
  * Creates an {@link AsyncStream} from a {@link ReadableStream} instance.

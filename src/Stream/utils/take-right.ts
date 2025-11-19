@@ -1,5 +1,5 @@
 import { toArray } from "../conversions";
-import { Stream } from "../uri";
+import type { Stream } from "../uri";
 
 /**
  * Takes given amount of items from a {@link Stream} from the end to the start.

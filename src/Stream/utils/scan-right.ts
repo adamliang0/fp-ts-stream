@@ -1,5 +1,5 @@
 import { toArray } from "../conversions";
-import { Stream } from "../uri";
+import type { Stream } from "../uri";
 
 /**
  * Fold a {@link Stream} from the right, keeping all intermediate results

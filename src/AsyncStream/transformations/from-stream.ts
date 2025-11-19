@@ -1,5 +1,5 @@
-import { Stream } from "../../Stream/uri";
-import { AsyncStream } from "../uri";
+import type { Stream } from "../../Stream/uri";
+import type { AsyncStream } from "../uri";
 
 /**
  * Creates an {@link AsyncStream} from a {@link Stream} instance.

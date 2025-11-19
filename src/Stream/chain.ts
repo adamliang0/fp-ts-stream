@@ -5,12 +5,10 @@ import {
 } from "fp-ts/Chain";
 import type { ChainRec1 } from "fp-ts/ChainRec";
 import { type Either, isLeft } from "fp-ts/Either";
-
 import { Applicative } from "./applicative";
 import { Functor } from "./functor";
 import { of } from "./pointed";
 import { type Stream, URI } from "./uri";
-
 /**
  * Chains a {@link Stream} by evaluating the function passed with the items
  * of it that returns another {@link Stream} instance of type `B`.
@@ -163,7 +161,12 @@ export function chainRecBreadthFirst<A, B>(f: (a: A) => Stream<Either<A, B>>) {
 
 			yield* go(f(a));
 			while (todo.length > 0) {
-				const fa = todo.shift()!;
+				const fa = todo.shift();
+
+				if (!fa) {
+					continue;
+				}
+
 				yield* go(fa);
 			}
 		};

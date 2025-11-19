@@ -1,7 +1,5 @@
-import { of } from "../pointed";
 import type { AsyncStream } from "../uri";
 import type { AsyncPredicate } from "../utils/async-predicate";
-import { empty } from "../zero";
 
 /**
  * Creates a {@link AsyncStream} from a {@link AsyncPredicate}.
