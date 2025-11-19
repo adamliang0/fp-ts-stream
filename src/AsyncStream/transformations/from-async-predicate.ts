@@ -1,6 +1,6 @@
 import { of } from "../pointed";
-import { AsyncStream } from "../uri";
-import { AsyncPredicate } from "../utils/async-predicate";
+import type { AsyncStream } from "../uri";
+import type { AsyncPredicate } from "../utils/async-predicate";
 import { empty } from "../zero";
 
 /**
@@ -47,9 +47,8 @@ export function fromAsyncPredicate<A>(predicate: AsyncPredicate<A>) {
 	 */
 	return function _fromAsyncPredicate(a: A): AsyncStream<A> {
 		return async function* __fromAsyncPredicate() {
-			if (await predicate(a)) return of(a);
-			else {
-				return empty;
+			if (await predicate(a)) {
+				yield a;
 			}
 		};
 	};
