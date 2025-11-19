@@ -1,0 +1,4 @@
+{
+    "vitest.rootConfig": "./vitest.config.mjs",
+    "typescript.tsdk": "node_modules/typescript/lib"
+}

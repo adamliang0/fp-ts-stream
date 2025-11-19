@@ -1,4 +1,4 @@
-import { Stream } from "./uri";
+import type { Stream } from "./uri";
 
 /**
  * Concatenates two {@link Stream}s into one.
