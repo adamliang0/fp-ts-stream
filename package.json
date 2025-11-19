@@ -1,6 +1,6 @@
 {
 	"name": "fp-ts-stream",
-	"version": "0.1.18",
+	"version": "0.1.19",
 	"description": "A library providing async and sync streams for fp-ts.",
 	"exports": {
 		".": {
@@ -19,10 +19,12 @@
 	"main": "dist/index.js",
 	"sideEffects": false,
 	"scripts": {
-		"test": "vitest",
+		"test": "vitest run",
+		"test:watch": "vitest",
 		"build": "rslib build",
 		"dev": "rslib build --watch",
-		"release": "release-it",
+		"lint": "biome check .",
+		"lint:fix": "biome check . --write",
 		"prepare": "husky"
 	},
 	"repository": {
