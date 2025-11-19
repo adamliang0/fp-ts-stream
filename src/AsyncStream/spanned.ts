@@ -1,11 +1,11 @@
-import { pipe } from 'fp-ts/lib/function'
-import { Refinement } from 'fp-ts/lib/Refinement'
-import { Task } from 'fp-ts/lib/Task'
+import { pipe } from "fp-ts/function";
+import type { Refinement } from "fp-ts/Refinement";
+import type { Task } from "fp-ts/Task";
 
-import { fromIterable } from './conversions'
-import { AsyncStream } from './uri'
-import { AsyncPredicate } from './utils/async-predicate'
-import { reverse } from './utils/reverse'
+import { fromIterable } from "./conversions";
+import type { AsyncStream } from "./uri";
+import type { AsyncPredicate } from "./utils/async-predicate";
+import { reverse } from "./utils/reverse";
 
 /**
  * Defines an interface where the `init` and the `rest` part of
@@ -17,21 +17,21 @@ import { reverse } from './utils/reverse'
  * @template R The rest of the {@link AsyncStream}.
  */
 export interface Spanned<I, R> {
-  /**
-   * The init part of the {@link AsyncStream} where the condition was met.
-   *
-   * @type {AsyncStream<I>}
-   * @memberof Spanned
-   */
-  readonly init: AsyncStream<I>
+	/**
+	 * The init part of the {@link AsyncStream} where the condition was met.
+	 *
+	 * @type {AsyncStream<I>}
+	 * @memberof Spanned
+	 */
+	readonly init: AsyncStream<I>;
 
-  /**
-   * The rest of the {@link AsyncStream}.
-   *
-   * @type {AsyncStream<R>}
-   * @memberof Spanned
-   */
-  readonly rest: AsyncStream<R>
+	/**
+	 * The rest of the {@link AsyncStream}.
+	 *
+	 * @type {AsyncStream<R>}
+	 * @memberof Spanned
+	 */
+	readonly rest: AsyncStream<R>;
 }
 
 /**
@@ -44,10 +44,12 @@ export interface Spanned<I, R> {
  * @return {(fa: AsyncStream<A>) => Task<Spanned<B, A>>} A function that takes
  * an {@link AsyncStream} and returns a {@link Task} of a {@link Spanned}
  * instance of it.
- * 
+ *
  * @__PURE__
  */
-export function spanLeft<A, B extends A>(refinement: Refinement<A, B>): (fa: AsyncStream<A>) => Task<Spanned<B, A>>
+export function spanLeft<A, B extends A>(
+	refinement: Refinement<A, B>,
+): (fa: AsyncStream<A>) => Task<Spanned<B, A>>;
 
 /**
  * Spans an {@link AsyncStream} from the left side of it, based on a predicate.
@@ -58,10 +60,12 @@ export function spanLeft<A, B extends A>(refinement: Refinement<A, B>): (fa: Asy
  * @return {<B extends A>(fb: AsyncStream<B>) => Task<Spanned<B, B>>} A function
  * that takes an {@link AsyncStream} and returns a {@link Task} of a
  * {@link Spanned} instance of it.
- * 
+ *
  * @__PURE__
  */
-export function spanLeft<A>(predicate: AsyncPredicate<A>): <B extends A>(fb: AsyncStream<B>) => Task<Spanned<B, B>>
+export function spanLeft<A>(
+	predicate: AsyncPredicate<A>,
+): <B extends A>(fb: AsyncStream<B>) => Task<Spanned<B, B>>;
 
 /**
  * Spans a {@link AsyncStream} from the left side of it, based on a predicate.
@@ -72,47 +76,49 @@ export function spanLeft<A>(predicate: AsyncPredicate<A>): <B extends A>(fb: Asy
  * @return {(fa: AsyncStream<A>) => Task<Spanned<A, A>>} A function that takes
  * an {@link AsyncStream} and returns a {@link Task} of a {@link Spanned}
  * instance of it.
- * 
+ *
  * @__PURE__
  */
-export function spanLeft<A>(predicate: AsyncPredicate<A>): (fa: AsyncStream<A>) => Task<Spanned<A, A>>
-export function spanLeft<A>(predicate: AsyncPredicate<A>): (fa: AsyncStream<A>) => Task<Spanned<A, A>> {
-  return function _spanLeft(fa): Task<Spanned<A, A>> {
-    return async function __spanLeft() {
-      const gen = fa()
-      const matches: A[] = []
+export function spanLeft<A>(
+	predicate: AsyncPredicate<A>,
+): (fa: AsyncStream<A>) => Task<Spanned<A, A>>;
+export function spanLeft<A>(
+	predicate: AsyncPredicate<A>,
+): (fa: AsyncStream<A>) => Task<Spanned<A, A>> {
+	return function _spanLeft(fa): Task<Spanned<A, A>> {
+		return async function __spanLeft() {
+			const gen = fa();
+			const matches: A[] = [];
 
-      while (true) {
-        const curr = await gen.next()
+			while (true) {
+				const curr = await gen.next();
 
-        if (curr.done) {
-          return {
-            init: fromIterable(matches),
-            rest: () => gen,
-          }
-        }
+				if (curr.done) {
+					return {
+						init: fromIterable(matches),
+						rest: () => gen,
+					};
+				}
 
-        if (await predicate(curr.value)) {
-          matches.push(curr.value)
-          continue
-        }
-        else {
-          return {
-            init: fromIterable(matches),
-            async *rest() {
-              yield curr.value
-              yield* gen
-            }
-          }
-        }
-      }
-    }
-  }
+				if (await predicate(curr.value)) {
+					matches.push(curr.value);
+				} else {
+					return {
+						init: fromIterable(matches),
+						async *rest() {
+							yield curr.value;
+							yield* gen;
+						},
+					};
+				}
+			}
+		};
+	};
 }
 
 /**
  * Spans a {@link AsyncStream} from the right side of it based on a refinement.
- * 
+ *
  * **Warning: This function consumes the stream.**
  *
  * @export
@@ -122,14 +128,16 @@ export function spanLeft<A>(predicate: AsyncPredicate<A>): (fa: AsyncStream<A>) 
  * @return {(fa: AsyncStream<A>) => Task<Spanned<B, A>>} A function that takes
  * an {@link AsyncStream} and returns a {@link Task} of a {@link Spanned}
  * instance of it.
- * 
+ *
  * @__PURE__
  */
-export function spanRight<A, B extends A>(refinement: Refinement<A, B>): (fa: AsyncStream<A>) => Task<Spanned<B, A>>
+export function spanRight<A, B extends A>(
+	refinement: Refinement<A, B>,
+): (fa: AsyncStream<A>) => Task<Spanned<B, A>>;
 
 /**
  * Spans a {@link AsyncStream} from the right side of it, based on a predicate.
- * 
+ *
  * **Warning: This function consumes the stream.**
  *
  * @export
@@ -138,14 +146,16 @@ export function spanRight<A, B extends A>(refinement: Refinement<A, B>): (fa: As
  * @return {<B extends A>(fb: Stream<B>) => Spanned<B, B>} A function
  * that takes an {@link AsyncStream} and returns a {@link Task} of a
  * {@link Spanned} instance of it.
- * 
+ *
  * @__PURE__
  */
-export function spanRight<A>(predicate: AsyncPredicate<A>): <B extends A>(fb: AsyncStream<B>) => Task<Spanned<B, B>>
+export function spanRight<A>(
+	predicate: AsyncPredicate<A>,
+): <B extends A>(fb: AsyncStream<B>) => Task<Spanned<B, B>>;
 
 /**
  * Spans an {@link AsyncStream} from the right side of it, based on a predicate.
- * 
+ *
  * **Warning: This function consumes the stream.**
  *
  * @export
@@ -153,16 +163,16 @@ export function spanRight<A>(predicate: AsyncPredicate<A>): <B extends A>(fb: As
  * @param {AsyncPredicate<A>} predicate The predicate function.
  * @return {(fa: AsyncStream<A>) => Task<Spanned<A, A>>} A function that takes
  * an {@link AsyncStream} and returns a {@link Spanned} instance of it.
- * 
+ *
  * @__PURE__
  */
-export function spanRight<A>(predicate: AsyncPredicate<A>): (fa: AsyncStream<A>) => Task<Spanned<A, A>>
-export function spanRight<A>(predicate: AsyncPredicate<A>): (fa: AsyncStream<A>) => Task<Spanned<A, A>> {
-  return function _spanRight(ma) {
-    return pipe(
-      ma,
-      reverse,
-      spanLeft(predicate)
-    )
-  }
+export function spanRight<A>(
+	predicate: AsyncPredicate<A>,
+): (fa: AsyncStream<A>) => Task<Spanned<A, A>>;
+export function spanRight<A>(
+	predicate: AsyncPredicate<A>,
+): (fa: AsyncStream<A>) => Task<Spanned<A, A>> {
+	return function _spanRight(ma) {
+		return pipe(ma, reverse, spanLeft(predicate));
+	};
 }

@@ -1,7 +1,7 @@
-import { Predicate } from 'fp-ts/lib/Predicate'
-import { Refinement } from 'fp-ts/lib/Refinement'
+import type { Predicate } from "fp-ts/Predicate";
+import type { Refinement } from "fp-ts/Refinement";
 
-import { Stream } from '../uri'
+import type { Stream } from "../uri";
 
 /**
  * `every` tells if the provided refinement holds true for every element
@@ -13,12 +13,12 @@ import { Stream } from '../uri'
  * @param {Refinement<A, B>} refinement The refinement function.
  * @return {Refinement<Stream<A>, Stream<B>>} `true` if all the elements
  * returned `true` from the refinement function.
- * 
+ *
  * @__PURE__
  */
 export function every<A, B extends A>(
-  refinement: Refinement<A, B>
-): Refinement<Stream<A>, Stream<B>>
+	refinement: Refinement<A, B>,
+): Refinement<Stream<A>, Stream<B>>;
 
 /**
  * `every` tells if the provided predicate holds true for every element
@@ -30,16 +30,16 @@ export function every<A, B extends A>(
  * @param {Predicate<A>} predicate The predicate function.
  * @return {Predicate<Stream<A>>} `true` if all the elements
  * returned `true` from the refinement function.
- * 
+ *
  * @__PURE__
  */
-export function every<A>(predicate: Predicate<A>): Predicate<Stream<A>>
+export function every<A>(predicate: Predicate<A>): Predicate<Stream<A>>;
 export function every<A>(predicate: Predicate<A>): Predicate<Stream<A>> {
-  return function _every(ma) {
-    for (const a of ma()) {
-      if (!predicate(a)) return false
-    }
+	return function _every(ma) {
+		for (const a of ma()) {
+			if (!predicate(a)) return false;
+		}
 
-    return true
-  }
+		return true;
+	};
 }

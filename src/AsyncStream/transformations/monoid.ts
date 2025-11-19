@@ -1,10 +1,10 @@
-import { Eq } from 'fp-ts/lib/Eq'
-import { Monoid } from 'fp-ts/lib/Monoid'
+import type { Eq } from "fp-ts/Eq";
+import type { Monoid } from "fp-ts/Monoid";
 
-import { concat } from '../concat'
-import { AsyncStream } from '../uri'
-import { empty } from '../zero'
-import { getUnionSemigroup } from './semigroup'
+import { concat } from "../concat";
+import type { AsyncStream } from "../uri";
+import { empty } from "../zero";
+import { getUnionSemigroup } from "./semigroup";
 
 /**
  * Returns a {@link Monoid} for {@link Stream}.
@@ -13,15 +13,15 @@ import { getUnionSemigroup } from './semigroup'
  * @template A The value type.
  * @return {Monoid<AsyncStream<A>>} A {@link Monoid} instance for
  * {@link AsyncStream} of type `A`.
- * 
+ *
  * @category instances
  * @__PURE__
  */
 export function getMonoid<A = never>(): Monoid<AsyncStream<A>> {
-  return {
-    empty,
-    concat: (x, y) => concat(y)(x)
-  }
+	return {
+		empty,
+		concat: (x, y) => concat(y)(x),
+	};
 }
 
 /**
@@ -33,13 +33,13 @@ export function getMonoid<A = never>(): Monoid<AsyncStream<A>> {
  * @param {Eq<A>} E The {@link Eq} instance for type `A`.
  * @return {Monoid<AsyncStream<A>>} A {@link Monoid} instance for
  * {@link AsyncStream} of type `A`.
- * 
+ *
  * @category instances
  * @__PURE__
  */
 export function getUnionMonoid<A>(E: Eq<A>): Monoid<AsyncStream<A>> {
-  return {
-    empty,
-    concat: getUnionSemigroup(E).concat,
-  }
+	return {
+		empty,
+		concat: getUnionSemigroup(E).concat,
+	};
 }

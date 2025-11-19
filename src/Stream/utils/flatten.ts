@@ -1,4 +1,4 @@
-import { Stream } from '../uri'
+import { Stream } from "../uri";
 
 /**
  * Takes a {@link Stream} of {@link Stream}s of `A` and flattens them into
@@ -9,12 +9,12 @@ import { Stream } from '../uri'
  * @template A The value type.
  * @param {Stream<Stream<A>>} mma The input streams.
  * @return {Stream<A>} The output stream.
- * 
+ *
  * @category sequencing
  * @__PURE__
  */
 export function flatten<A>(mma: Stream<Stream<A>>): Stream<A> {
-  return function* _flatten() {
-    for (const ma of mma()) yield* ma()
-  }
+	return function* _flatten() {
+		for (const ma of mma()) yield* ma();
+	};
 }

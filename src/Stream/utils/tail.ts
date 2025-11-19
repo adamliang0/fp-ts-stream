@@ -1,6 +1,6 @@
-import { none, some } from 'fp-ts/lib/Option'
+import { none, some } from "fp-ts/Option";
 
-import { Stream } from '../uri'
+import type { Stream } from "../uri";
 
 /**
  * Gets all but the first element of a {@link Stream}, creating a new
@@ -11,15 +11,15 @@ import { Stream } from '../uri'
  * @param {Stream<A>} fa The input stream.
  * @return {Option<Stream<A>>} An option of a stream whose first element is
  * excluded.
- * 
+ *
  * @__PURE__
  */
 export function tail<A>(fa: Stream<A>) {
-  const gen = fa()
-  const { done } = gen.next()
+	const gen = fa();
+	const { done } = gen.next();
 
-  if (done) return none
-  return some(function* _tail() {
-    yield* gen
-  })
+	if (done) return none;
+	return some(function* _tail() {
+		yield* gen;
+	});
 }

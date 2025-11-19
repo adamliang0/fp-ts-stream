@@ -1,5 +1,5 @@
-import { Stream } from '../uri'
-import { prepend } from './prepend'
+import { Stream } from "../uri";
+import { prepend } from "./prepend";
 
 /**
  * A useful recursion pattern for processing a {@link Stream} to produce a new
@@ -13,35 +13,37 @@ import { prepend } from './prepend'
  * @param {(fa: Stream<A>) => [ B, Stream<A> ]} f The chop function.
  * @return {(fa: Stream<A>) => Stream<B>} A function that takes a stream to
  * chop the first element of it.
- * 
+ *
  * @__PURE__
  */
-export function chop<A, B>(f: (fa: Stream<A>) => [ B, Stream<A> ]) {
-  /**
-   * Chops the given {@link Stream} and returns another {@link Stream} based
-   * on the previously given function.
-   *
-   * @param {Stream<A>} fa The input stream.
-   * @return {Stream<B>} The output stream.
-   * 
-   * @__PURE__
-   */
-  return function _chop(fa: Stream<A>): Stream<B> {
-    return function* __chop() {
-      let target = fa
+export function chop<A, B>(f: (fa: Stream<A>) => [B, Stream<A>]) {
+	/**
+	 * Chops the given {@link Stream} and returns another {@link Stream} based
+	 * on the previously given function.
+	 *
+	 * @param {Stream<A>} fa The input stream.
+	 * @return {Stream<B>} The output stream.
+	 *
+	 * @__PURE__
+	 */
+	return function _chop(fa: Stream<A>): Stream<B> {
+		return function* __chop() {
+			let target = fa;
 
-      while (true) {
-        const [ b, nextStream ] = f(target)
-        yield b
+			while (true) {
+				const [b, nextStream] = f(target);
+				yield b;
 
-        // Executing the stream manually to prevent invoking the next twice.
-        const nextGen = nextStream()
-        const { value, done } = nextGen.next()
+				// Executing the stream manually to prevent invoking the next twice.
+				const nextGen = nextStream();
+				const { value, done } = nextGen.next();
 
-        if (done) { return }
+				if (done) {
+					return;
+				}
 
-        target = prepend(value)(() => nextGen)
-      }
-    }
-  }
+				target = prepend(value)(() => nextGen);
+			}
+		};
+	};
 }

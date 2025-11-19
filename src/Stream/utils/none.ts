@@ -1,8 +1,8 @@
-import { not, Predicate } from 'fp-ts/lib/Predicate'
-import { Refinement } from 'fp-ts/lib/Refinement'
+import { not, type Predicate } from "fp-ts/Predicate";
+import type { Refinement } from "fp-ts/Refinement";
 
-import { Stream } from '../uri'
-import { every } from './every'
+import type { Stream } from "../uri";
+import { every } from "./every";
 
 /**
  * `none` tells if the provided refinement holds `false` for every element
@@ -14,12 +14,12 @@ import { every } from './every'
  * @param {Refinement<A, B>} refinement The refinement function.
  * @return {Refinement<Stream<A>, Stream<B>>} `true` if all the elements
  * returned `false` from the refinement function.
- * 
+ *
  * @__PURE__
  */
 export function none<A, B extends A>(
-  refinement: Refinement<A, B>
-): Refinement<Stream<A>, Stream<B>>
+	refinement: Refinement<A, B>,
+): Refinement<Stream<A>, Stream<B>>;
 
 /**
  * `none` tells if the provided predicate holds false for none element
@@ -31,10 +31,10 @@ export function none<A, B extends A>(
  * @param {Predicate<A>} predicate The predicate function.
  * @return {Predicate<Stream<A>>} `true` if all the elements
  * returned `false` from the refinement function.
- * 
+ *
  * @__PURE__
  */
-export function none<A>(predicate: Predicate<A>): Predicate<Stream<A>>
+export function none<A>(predicate: Predicate<A>): Predicate<Stream<A>>;
 export function none<A>(predicate: Predicate<A>) {
-  return every(not(predicate))
+	return every(not(predicate));
 }

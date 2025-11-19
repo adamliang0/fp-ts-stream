@@ -1,9 +1,9 @@
-import { toArray } from '../conversions'
-import { AsyncStream } from '../uri'
+import { toArray } from "../conversions";
+import { AsyncStream } from "../uri";
 
 /**
  * Reverses an {@link AsyncStream} and returns another one.
- * 
+ *
  * **Warning: This function consumes the stream.**
  *
  * @export
@@ -12,10 +12,10 @@ import { AsyncStream } from '../uri'
  * @return {AsyncStream<A>} The output async stream.
  */
 export function reverse<A>(fa: AsyncStream<A>): AsyncStream<A> {
-  return async function* _reverse() {
-    const items = await toArray(fa)
-    for (const item of items.reverse()) {
-      yield item
-    }
-  }
+	return async function* _reverse() {
+		const items = await toArray(fa);
+		for (const item of items.reverse()) {
+			yield item;
+		}
+	};
 }

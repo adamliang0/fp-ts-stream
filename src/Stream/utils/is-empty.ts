@@ -1,4 +1,4 @@
-import { Stream } from '../uri'
+import { Stream } from "../uri";
 
 /**
  * Tests whether a {@link Stream} is empty.
@@ -7,13 +7,13 @@ import { Stream } from '../uri'
  * @template A The value type.
  * @param {Stream<A>} fa The input stream.
  * @return {boolean} `true` if the stream was empty, `false` otherwise.
- * 
+ *
  * @__PURE__
  */
 export function isEmpty<A>(fa: Stream<A>) {
-  const gen = fa()
-  const { done } = gen.next()
-  return done
+	const gen = fa();
+	const { done } = gen.next();
+	return done;
 }
 
 /**
@@ -23,7 +23,9 @@ export function isEmpty<A>(fa: Stream<A>) {
  * @template A The value type.
  * @param {Stream<A>} ma The input stream.
  * @return {boolean} `true` if the stream was not empty, `false` otherwise.
- * 
+ *
  * @__PURE__
  */
-export function isNotEmpty<A>(ma: Stream<A>) { return !isEmpty(ma) }
+export function isNotEmpty<A>(ma: Stream<A>) {
+	return !isEmpty(ma);
+}

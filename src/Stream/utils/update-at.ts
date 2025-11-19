@@ -1,4 +1,4 @@
-import { modifyAt } from './modify-at'
+import { modifyAt } from "./modify-at";
 
 /**
  * Changes the element at the specified index, creating a new {@link Stream}.
@@ -9,9 +9,9 @@ import { modifyAt } from './modify-at'
  * @param {A} a The value to set.
  * @return {Stream<A>} The stream whose value at given
  * index is modified.
- * 
+ *
  * @__PURE__
  */
 export function updateAt<A>(i: number, a: A) {
-  return modifyAt<A>(i, (_) => a)
+	return modifyAt<A>(i, (_) => a);
 }

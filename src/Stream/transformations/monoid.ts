@@ -1,10 +1,10 @@
-import { Eq } from 'fp-ts/lib/Eq'
-import { Monoid } from 'fp-ts/lib/Monoid'
+import type { Eq } from "fp-ts/Eq";
+import type { Monoid } from "fp-ts/Monoid";
 
-import { concat } from '../concat'
-import { Stream } from '../uri'
-import { empty } from '../zero'
-import { getUnionSemigroup } from './semigroup'
+import { concat } from "../concat";
+import type { Stream } from "../uri";
+import { empty } from "../zero";
+import { getUnionSemigroup } from "./semigroup";
 
 /**
  * Returns a {@link Monoid} for {@link Stream}.
@@ -13,24 +13,24 @@ import { getUnionSemigroup } from './semigroup'
  * @template A The value type.
  * @return {Monoid<Stream<A>>} A {@link Monoid} instance for {@link Stream}
  * of type `A`.
- * 
+ *
  * @example
  * import { getMonoid, fromIterable, toArray } from 'fp-ts-stream/Stream'
  * const M = getMonoid<number>()
- * 
+ *
  * assert.deepStrictEqual(
  *   toArray(M.concat(fromIterable([1, 2]), fromIterable([3, 4]))),
  *   [1, 2, 3, 4]
  * )
- * 
+ *
  * @category instances
  * @__PURE__
  */
 export function getMonoid<A = never>(): Monoid<Stream<A>> {
-  return {
-    empty,
-    concat: (x, y) => concat(y)(x)
-  }
+	return {
+		empty,
+		concat: (x, y) => concat(y)(x),
+	};
 }
 
 /**
@@ -42,22 +42,22 @@ export function getMonoid<A = never>(): Monoid<Stream<A>> {
  * @param {Eq<A>} E The {@link Eq} instance for type `A`.
  * @return {Monoid<Stream<A>>} A {@link Monoid} instance for {@link Stream}
  * of type `A`.
- * 
+ *
  * @example
  * import { getMonoid, fromIterable, toArray } from 'fp-ts-stream/Stream'
  * const M = getMonoid<number>()
- * 
+ *
  * assert.deepStrictEqual(
  *   toArray(M.concat(fromIterable([1, 2]), fromIterable([2, 3, 4]))),
  *   [1, 2, 3, 4]
  * )
- * 
+ *
  * @category instances
  * @__PURE__
  */
 export function getUnionMonoid<A>(E: Eq<A>): Monoid<Stream<A>> {
-  return {
-    empty,
-    concat: getUnionSemigroup(E).concat,
-  }
+	return {
+		empty,
+		concat: getUnionSemigroup(E).concat,
+	};
 }

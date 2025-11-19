@@ -1,6 +1,6 @@
-import { none, Option, some } from 'fp-ts/lib/Option'
+import { none, type Option, some } from "fp-ts/Option";
 
-import { Stream } from '../uri'
+import type { Stream } from "../uri";
 
 /**
  * Gets the first element in a {@link Stream}, or `None` if the {@link Stream}
@@ -10,15 +10,15 @@ import { Stream } from '../uri'
  * @template A The value type.
  * @param {Stream<A>} ma The input stream.
  * @return {Option<A>} An option of the first value in the stream.
- * 
+ *
  * @__PURE__
  */
 export function head<A>(ma: Stream<A>): Option<A> {
-  const gen = ma()
-  const { value, done } = gen.next()
+	const gen = ma();
+	const { value, done } = gen.next();
 
-  if (done) return none
-  else {
-    return some(value)
-  }
+	if (done) return none;
+	else {
+		return some(value);
+	}
 }

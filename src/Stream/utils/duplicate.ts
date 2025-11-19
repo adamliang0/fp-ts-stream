@@ -1,7 +1,7 @@
-import { identity } from 'fp-ts/lib/function'
+import { identity } from "fp-ts/function";
 
-import { extend } from '../extend'
-import { Stream } from '../uri'
+import { extend } from "../extend";
+import type { Stream } from "../uri";
 
 /**
  * `duplicate` returns a {@link Stream} containing the whole input
@@ -12,9 +12,9 @@ import { Stream } from '../uri'
  * @template A The value type.
  * @param {Stream<A>} wa The input stream.
  * @return {Stream<Stream<A>>} The output stream of streams.
- * 
+ *
  * @__PURE__
  */
 export function duplicate<A>(wa: Stream<A>): Stream<Stream<A>> {
-  return extend<A, Stream<A>>(identity)(wa)
+	return extend<A, Stream<A>>(identity)(wa);
 }

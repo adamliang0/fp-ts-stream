@@ -1,9 +1,9 @@
-import { Compactable1 } from 'fp-ts/lib/Compactable'
-import { Either, isLeft, isRight } from 'fp-ts/lib/Either'
-import { isSome, Option } from 'fp-ts/lib/Option'
-import { Separated } from 'fp-ts/lib/Separated'
+import type { Compactable1 } from "fp-ts/Compactable";
+import { type Either, isLeft, isRight } from "fp-ts/Either";
+import { isSome, type Option } from "fp-ts/Option";
+import type { Separated } from "fp-ts/Separated";
 
-import { AsyncStream, URI } from './uri'
+import { type AsyncStream, URI } from "./uri";
 
 /**
  * Compact a {@link AsyncStream} of {@link Option}s discarding the `None` values
@@ -14,18 +14,18 @@ import { AsyncStream, URI } from './uri'
  * @template A The value type.
  * @param {AsyncStream<Option<A>>} fa The input async stream.
  * @return {AsyncStream<A>} The output async stream.
- * 
+ *
  * @category filtering
  * @__PURE__
  */
 export function compact<A>(fa: AsyncStream<Option<A>>): AsyncStream<A> {
-  return async function* __compact() {
-    for await (const a of fa()) {
-      if (isSome(a)) {
-        yield a.value
-      }
-    }
-  }
+	return async function* __compact() {
+		for await (const a of fa()) {
+			if (isSome(a)) {
+				yield a.value;
+			}
+		}
+	};
 }
 
 /**
@@ -39,34 +39,36 @@ export function compact<A>(fa: AsyncStream<Option<A>>): AsyncStream<A> {
  * @param {AsyncStream<Either<E, A>>} fa The input async stream.
  * @return {Separated<AsyncStream<E>, AsyncStream<A>>} The separated output
  * async streams.
- * 
+ *
  * @category filtering
  * @__PURE__
  */
-export function separate<E, A>(fa: AsyncStream<Either<E, A>>): Separated<AsyncStream<E>, AsyncStream<A>> {
-  return {
-    async *left() {
-      for await (const a of fa()) {
-        if (isLeft(a)) {
-          yield a.left
-        }
-      }
-    },
-    async *right() {
-      for await (const a of fa()) {
-        if (isRight(a)) {
-          yield a.right
-        }
-      }
-    }
-  }
+export function separate<E, A>(
+	fa: AsyncStream<Either<E, A>>,
+): Separated<AsyncStream<E>, AsyncStream<A>> {
+	return {
+		async *left() {
+			for await (const a of fa()) {
+				if (isLeft(a)) {
+					yield a.left;
+				}
+			}
+		},
+		async *right() {
+			for await (const a of fa()) {
+				if (isRight(a)) {
+					yield a.right;
+				}
+			}
+		},
+	};
 }
 
 /**
  * The `Compactable` category instance for {@link AsyncStream}.
  */
 export const Compactable: Compactable1<URI> = {
-  URI,
-  compact,
-  separate,
-}
+	URI,
+	compact,
+	separate,
+};

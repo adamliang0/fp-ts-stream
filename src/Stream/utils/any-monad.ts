@@ -1,28 +1,26 @@
+import { pipe } from "fp-ts/function";
 import type {
-  HKT,
-  Kind,
-  Kind2,
-  Kind3,
-  Kind4,
-  URIS,
-  URIS2,
-  URIS3,
-  URIS4,
-} from 'fp-ts/HKT'
+	HKT,
+	Kind,
+	Kind2,
+	Kind3,
+	Kind4,
+	URIS,
+	URIS2,
+	URIS3,
+	URIS4,
+} from "fp-ts/HKT";
 import type {
-  Monad,
-  Monad1,
-  Monad2,
-  Monad2C,
-  Monad3,
-  Monad3C,
-  Monad4,
-} from 'fp-ts/lib/Monad'
-import type { Stream } from '../uri'
-
-import { pipe } from 'fp-ts/lib/function'
-
-import { reduce } from '../foldable'
+	Monad,
+	Monad1,
+	Monad2,
+	Monad2C,
+	Monad3,
+	Monad3C,
+	Monad4,
+} from "fp-ts/Monad";
+import { reduce } from "../foldable";
+import type { Stream } from "../uri";
 
 /**
  * Fold a {@link Stream} of monadic booleans from left-to-right in terms of `||`.
@@ -36,7 +34,11 @@ import { reduce } from '../foldable'
  *
  * @__PURE__
  */
-export function anyM<F extends URIS4>(M: Monad4<F>): <S, R, E>(input: Stream<Kind4<F, S, R, E, boolean>>) => Kind4<F, S, R, E, boolean>
+export function anyM<F extends URIS4>(
+	M: Monad4<F>,
+): <S, R, E>(
+	input: Stream<Kind4<F, S, R, E, boolean>>,
+) => Kind4<F, S, R, E, boolean>;
 
 /**
  * Fold a {@link Stream} of monadic booleans from left-to-right in terms of `||`.
@@ -50,7 +52,9 @@ export function anyM<F extends URIS4>(M: Monad4<F>): <S, R, E>(input: Stream<Kin
  *
  * @__PURE__
  */
-export function anyM<F extends URIS3>(M: Monad3<F>): <R, E>(input: Stream<Kind3<F, R, E, boolean>>) => Kind3<F, R, E, boolean>
+export function anyM<F extends URIS3>(
+	M: Monad3<F>,
+): <R, E>(input: Stream<Kind3<F, R, E, boolean>>) => Kind3<F, R, E, boolean>;
 
 /**
  * Fold a {@link Stream} of monadic booleans from left-to-right in terms of `||`.
@@ -65,7 +69,9 @@ export function anyM<F extends URIS3>(M: Monad3<F>): <R, E>(input: Stream<Kind3<
  *
  *  @__PURE__
  */
-export function anyM<F extends URIS3, E>(M: Monad3C<F, E>): <R>(input: Stream<Kind3<F, R, E, boolean>>) => Kind3<F, R, E, boolean>
+export function anyM<F extends URIS3, E>(
+	M: Monad3C<F, E>,
+): <R>(input: Stream<Kind3<F, R, E, boolean>>) => Kind3<F, R, E, boolean>;
 
 /**
  * Fold a {@link Stream} of monadic booleans from left-to-right in terms of `||`.
@@ -79,7 +85,9 @@ export function anyM<F extends URIS3, E>(M: Monad3C<F, E>): <R>(input: Stream<Ki
  *
  * @__PURE__
  */
-export function anyM<F extends URIS2>(M: Monad2<F>): <E>(input: Stream<Kind2<F, E, boolean>>) => Kind2<F, E, boolean>
+export function anyM<F extends URIS2>(
+	M: Monad2<F>,
+): <E>(input: Stream<Kind2<F, E, boolean>>) => Kind2<F, E, boolean>;
 
 /**
  * Fold a {@link Stream} of monadic booleans from left-to-right in terms of `||`.
@@ -94,7 +102,9 @@ export function anyM<F extends URIS2>(M: Monad2<F>): <E>(input: Stream<Kind2<F, 
  *
  * @__PURE__
  */
-export function anyM<F extends URIS2, E>(M: Monad2C<F, E>): (input: Stream<Kind2<F, E, boolean>>) => Kind2<F, E, boolean>
+export function anyM<F extends URIS2, E>(
+	M: Monad2C<F, E>,
+): (input: Stream<Kind2<F, E, boolean>>) => Kind2<F, E, boolean>;
 
 /**
  * Fold a {@link Stream} of monadic booleans from left-to-right in terms of `||`.
@@ -108,7 +118,9 @@ export function anyM<F extends URIS2, E>(M: Monad2C<F, E>): (input: Stream<Kind2
  *
  * @__PURE__
  */
-export function anyM<F extends URIS>(M: Monad1<F>): (input: Stream<Kind<F, boolean>>) => Kind<F, boolean>
+export function anyM<F extends URIS>(
+	M: Monad1<F>,
+): (input: Stream<Kind<F, boolean>>) => Kind<F, boolean>;
 
 /**
  * Fold a {@link Stream} of monadic booleans from left-to-right in terms of `||`.
@@ -122,22 +134,22 @@ export function anyM<F extends URIS>(M: Monad1<F>): (input: Stream<Kind<F, boole
  * @__PURE__
  */
 export function anyM<F>(M: Monad<F>) {
-  /**
-   * Takes a stream to fold in the previously given monadic context from left-to-right
-   * in terms of `||`.
-   *
-   * Short-circuits.
-   *
-   * @step 1
-   * @template A The type of the value.
-   * @param {(input: Stream<boolean>) => HKT<F, boolean>} input The input stream.
-   *
-   * @__PURE__
-   */
-  return function _anyM(input: Stream<HKT<F, boolean>>): HKT<F, boolean> {
-    return pipe(
-      input,
-      reduce(M.of(false), (x, y) => M.chain(x, b => (b ? M.of(true) : y)))
-    )
-  }
+	/**
+	 * Takes a stream to fold in the previously given monadic context from left-to-right
+	 * in terms of `||`.
+	 *
+	 * Short-circuits.
+	 *
+	 * @step 1
+	 * @template A The type of the value.
+	 * @param {(input: Stream<boolean>) => HKT<F, boolean>} input The input stream.
+	 *
+	 * @__PURE__
+	 */
+	return function _anyM(input: Stream<HKT<F, boolean>>): HKT<F, boolean> {
+		return pipe(
+			input,
+			reduce(M.of(false), (x, y) => M.chain(x, (b) => (b ? M.of(true) : y))),
+		);
+	};
 }

@@ -1,7 +1,7 @@
-import { pipe } from 'fp-ts/lib/function'
+import { pipe } from "fp-ts/function";
 
-import { fromIterable, toArray } from '../conversions'
-import { map } from '../functor'
+import { fromIterable, toArray } from "../conversions";
+import { map } from "../functor";
 
 import type { Stream } from "../uri";
 
@@ -18,12 +18,7 @@ import type { Stream } from "../uri";
  * @__PURE__
  */
 export function transpose<A>(xs: Stream<Stream<A>>): Stream<Stream<A>> {
-  return pipe(
-    xs,
-    map(toArray),
-    transposeArray,
-    map(fromIterable)
-  )
+	return pipe(xs, map(toArray), transposeArray, map(fromIterable));
 }
 
 /**
@@ -39,25 +34,24 @@ export function transpose<A>(xs: Stream<Stream<A>>): Stream<Stream<A>> {
  * @__PURE__
  */
 export function transposeArray<A>(xs: Stream<Array<A>>): Stream<Array<A>> {
-  return function* _transpose() {
-    const sources = toArray(xs)
+	return function* _transpose() {
+		const sources = toArray(xs);
 
-    let i = 0
-    while (true) {
-      const current = [] as A[]
+		let i = 0;
+		while (true) {
+			const current = [] as A[];
 
-      for (const source of sources) {
-        if (source.length <= i) continue
-        current.push(source[ i ])
-      }
+			for (const source of sources) {
+				if (source.length <= i) continue;
+				current.push(source[i]);
+			}
 
-      i++
-      if (current.length) {
-        yield current
-      }
-      else {
-        break
-      }
-    }
-  }
+			i++;
+			if (current.length) {
+				yield current;
+			} else {
+				break;
+			}
+		}
+	};
 }

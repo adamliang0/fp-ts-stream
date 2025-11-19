@@ -1,9 +1,9 @@
-import { fromIterable, toArray } from '../conversions'
-import { Stream } from '../uri'
+import { fromIterable, toArray } from "../conversions";
+import { Stream } from "../uri";
 
 /**
  * Reverses a {@link Stream} and returns another one.
- * 
+ *
  * **Warning: This function consumes the stream.**
  *
  * @export
@@ -12,5 +12,5 @@ import { Stream } from '../uri'
  * @return {Stream<A>} The output stream.
  */
 export function reverse<A>(fa: Stream<A>): Stream<A> {
-  return fromIterable(toArray(fa).reverse())
+	return fromIterable(toArray(fa).reverse());
 }

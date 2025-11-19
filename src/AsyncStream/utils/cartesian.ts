@@ -1,4 +1,4 @@
-import type { AsyncStream } from '../uri'
+import type { AsyncStream } from "../uri";
 
 /**
  * Returns the {@link https://en.wikipedia.org/wiki/Cartesian_product Cartesian product}
@@ -14,24 +14,24 @@ import type { AsyncStream } from '../uri'
  * @__PURE__
  */
 export function cartesian<A>(left: AsyncStream<A>) {
-  /**
-   * Returns the {@link https://en.wikipedia.org/wiki/Cartesian_product Cartesian product}
-   * of the previously given {@link AsyncStream} and this {@link AsyncStream}.
-   *
-   * @step 1
-   * @template B The type of the right hand side of the output tuple.
-   * @param {AsyncStream<B>} right The right hand side stream.
-   * @return {AsyncStream<[ A, B ]>} A {@link AsyncStream} of all `[A, B]` pairs.
-   *
-   * @__PURE__
-   */
-  return function _cartesian<B>(right: AsyncStream<B>): AsyncStream<[ A, B ]> {
-    return async function* __cartesian() {
-      for await (const lhs of left()) {
-        for await (const rhs of right()) {
-          yield [ lhs, rhs ]
-        }
-      }
-    }
-  }
+	/**
+	 * Returns the {@link https://en.wikipedia.org/wiki/Cartesian_product Cartesian product}
+	 * of the previously given {@link AsyncStream} and this {@link AsyncStream}.
+	 *
+	 * @step 1
+	 * @template B The type of the right hand side of the output tuple.
+	 * @param {AsyncStream<B>} right The right hand side stream.
+	 * @return {AsyncStream<[ A, B ]>} A {@link AsyncStream} of all `[A, B]` pairs.
+	 *
+	 * @__PURE__
+	 */
+	return function _cartesian<B>(right: AsyncStream<B>): AsyncStream<[A, B]> {
+		return async function* __cartesian() {
+			for await (const lhs of left()) {
+				for await (const rhs of right()) {
+					yield [lhs, rhs];
+				}
+			}
+		};
+	};
 }

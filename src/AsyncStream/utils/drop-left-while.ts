@@ -1,7 +1,7 @@
-import { Refinement } from 'fp-ts/lib/Refinement'
+import type { Refinement } from "fp-ts/Refinement";
 
-import { AsyncStream } from '../uri'
-import { AsyncPredicate } from './async-predicate'
+import type { AsyncStream } from "../uri";
+import type { AsyncPredicate } from "./async-predicate";
 
 /**
  * Creates a new {@link AsyncStream} which is a copy of the input dropping the
@@ -14,12 +14,12 @@ import { AsyncPredicate } from './async-predicate'
  * @param {Refinement<A, B>} refinement The refinement/predicate function.
  * @return {(fa: AsyncStream<A>) => AsyncStream<B>} A function that takes an
  * async stream to drop its left while the condition holds.
- * 
+ *
  * @__PURE__
  */
 export function dropLeftWhile<A, B extends A>(
-  refinement: Refinement<A, B>
-): (fa: AsyncStream<A>) => AsyncStream<B>
+	refinement: Refinement<A, B>,
+): (fa: AsyncStream<A>) => AsyncStream<B>;
 
 /**
  * Creates a new {@link AsyncStream} which is a copy of the input dropping the
@@ -31,12 +31,12 @@ export function dropLeftWhile<A, B extends A>(
  * @param {AsyncPredicate<A>} predicate The refinement/predicate function.
  * @return {<B extends A>(fa: AsyncStream<A>) => AsyncStream<B>} A function that
  * takes an stream to drop its left while the condition holds.
- * 
+ *
  * @__PURE__
  */
 export function dropLeftWhile<A>(
-  predicate: AsyncPredicate<A>
-): <B extends A>(fb: AsyncStream<B>) => AsyncStream<B>
+	predicate: AsyncPredicate<A>,
+): <B extends A>(fb: AsyncStream<B>) => AsyncStream<B>;
 
 /**
  * Creates a new {@link AsyncStream} which is a copy of the input dropping the
@@ -48,24 +48,28 @@ export function dropLeftWhile<A>(
  * @param {AsyncPredicate<A>} predicate The refinement/predicate function.
  * @return {(fa: AsyncStream<A>) => AsyncStream<B>} A function that takes an
  * async stream to drop its left while the condition holds.
- * 
+ *
  * @__PURE__
  */
-export function dropLeftWhile<A>(predicate: AsyncPredicate<A>): (fa: AsyncStream<A>) => AsyncStream<A>
-export function dropLeftWhile<A>(predicate: AsyncPredicate<A>): (fa: AsyncStream<A>) => AsyncStream<A> {
-  return function _dropLeftWhile(fa) {
-    return async function* __dropLeftWhile() {
-      const gen = fa()
+export function dropLeftWhile<A>(
+	predicate: AsyncPredicate<A>,
+): (fa: AsyncStream<A>) => AsyncStream<A>;
+export function dropLeftWhile<A>(
+	predicate: AsyncPredicate<A>,
+): (fa: AsyncStream<A>) => AsyncStream<A> {
+	return function _dropLeftWhile(fa) {
+		return async function* __dropLeftWhile() {
+			const gen = fa();
 
-      for await (const a of gen) {
-        if (await predicate(a)) {
-          continue
-        }
+			for await (const a of gen) {
+				if (await predicate(a)) {
+					continue;
+				}
 
-        yield a
-        yield* gen
-        return
-      }
-    }
-  }
+				yield a;
+				yield* gen;
+				return;
+			}
+		};
+	};
 }

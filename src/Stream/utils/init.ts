@@ -1,6 +1,6 @@
-import { none, Option, some } from 'fp-ts/lib/Option'
+import { none, type Option, some } from "fp-ts/Option";
 
-import { Stream } from '../uri'
+import type { Stream } from "../uri";
 
 /**
  * Gets all but the last element of a {@link Stream}, creating a new
@@ -10,27 +10,27 @@ import { Stream } from '../uri'
  * @template A The value type.
  * @param {Stream<A>} fa The input stream.
  * @return {Option<Stream<A>>} An option of output stream.
- * 
+ *
  * @__PURE__
  */
 export function init<A>(fa: Stream<A>): Option<Stream<A>> {
-  const gen = fa()
-  const { done, value } = gen.next()
+	const gen = fa();
+	const { done, value } = gen.next();
 
-  if (done) return none
-  return some(function* _init() {
-    let curr = gen.next()
-    if (curr.done) return
+	if (done) return none;
+	return some(function* _init() {
+		let curr = gen.next();
+		if (curr.done) return;
 
-    yield value
+		yield value;
 
-    let last = curr.value
-    while (!curr.done) {
-      curr = gen.next()
-      if (curr.done) return
+		let last = curr.value;
+		while (!curr.done) {
+			curr = gen.next();
+			if (curr.done) return;
 
-      yield last
-      last = curr.value
-    }
-  })
+			yield last;
+			last = curr.value;
+		}
+	});
 }

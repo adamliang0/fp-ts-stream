@@ -1,7 +1,7 @@
-import { identity } from 'fp-ts/lib/function'
+import { identity } from "fp-ts/function";
 
-import { extend } from '../extend'
-import { AsyncStream } from '../uri'
+import { extend } from "../extend";
+import type { AsyncStream } from "../uri";
 
 /**
  * `duplicate` returns an {@link AsyncStream} containing the whole input
@@ -14,9 +14,9 @@ import { AsyncStream } from '../uri'
  * @param {AsyncStream<A>} wa The input async stream.
  * @return {AsyncStream<AsyncStream<A>>} The output async stream of async
  * streams.
- * 
+ *
  * @__PURE__
  */
 export function duplicate<A>(wa: AsyncStream<A>): AsyncStream<AsyncStream<A>> {
-  return extend<A, AsyncStream<A>>(identity)(wa)
+	return extend<A, AsyncStream<A>>(identity)(wa);
 }

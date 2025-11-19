@@ -1,9 +1,9 @@
-import { Compactable1 } from 'fp-ts/lib/Compactable'
-import { Either, isLeft, isRight } from 'fp-ts/lib/Either'
-import { isSome, Option } from 'fp-ts/lib/Option'
-import { Separated } from 'fp-ts/lib/Separated'
+import type { Compactable1 } from "fp-ts/Compactable";
+import { type Either, isLeft, isRight } from "fp-ts/Either";
+import { isSome, type Option } from "fp-ts/Option";
+import type { Separated } from "fp-ts/Separated";
 
-import { Stream, URI } from './uri'
+import { type Stream, URI } from "./uri";
 
 /**
  * Compact a {@link Stream} of {@link Option}s discarding the `None` values
@@ -14,18 +14,18 @@ import { Stream, URI } from './uri'
  * @template A The value type.
  * @param {Stream<Option<A>>} fa The input stream.
  * @return {Stream<A>} The output stream.
- * 
+ *
  * @category filtering
  * @__PURE__
  */
 export function compact<A>(fa: Stream<Option<A>>): Stream<A> {
-  return function* __compact() {
-    for (const a of fa()) {
-      if (isSome(a)) {
-        yield a.value
-      }
-    }
-  }
+	return function* __compact() {
+		for (const a of fa()) {
+			if (isSome(a)) {
+				yield a.value;
+			}
+		}
+	};
 }
 
 /**
@@ -38,34 +38,36 @@ export function compact<A>(fa: Stream<Option<A>>): Stream<A> {
  * @template A The right value type.
  * @param {Stream<Either<E, A>>} fa The input stream.
  * @return {Separated<Stream<E>, Stream<A>>} The separated output streams.
- * 
+ *
  * @category filtering
  * @__PURE__
  */
-export function separate<E, A>(fa: Stream<Either<E, A>>): Separated<Stream<E>, Stream<A>> {
-  return {
-    *left() {
-      for (const a of fa()) {
-        if (isLeft(a)) {
-          yield a.left
-        }
-      }
-    },
-    *right() {
-      for (const a of fa()) {
-        if (isRight(a)) {
-          yield a.right
-        }
-      }
-    }
-  }
+export function separate<E, A>(
+	fa: Stream<Either<E, A>>,
+): Separated<Stream<E>, Stream<A>> {
+	return {
+		*left() {
+			for (const a of fa()) {
+				if (isLeft(a)) {
+					yield a.left;
+				}
+			}
+		},
+		*right() {
+			for (const a of fa()) {
+				if (isRight(a)) {
+					yield a.right;
+				}
+			}
+		},
+	};
 }
 
 /**
  * The `Compactable` category instance for {@link Stream}.
  */
 export const Compactable: Compactable1<URI> = {
-  URI,
-  compact,
-  separate,
-}
+	URI,
+	compact,
+	separate,
+};

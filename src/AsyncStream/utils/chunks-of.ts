@@ -1,8 +1,8 @@
-import { fromIterable } from '../../Stream/conversions'
-import { Stream } from '../../Stream/uri'
-import { of } from '../pointed'
-import { AsyncStream } from '../uri'
-import { zero } from '../zero'
+import { fromIterable } from "../../Stream/conversions";
+import { Stream } from "../../Stream/uri";
+import { of } from "../pointed";
+import { AsyncStream } from "../uri";
+import { zero } from "../zero";
 
 /**
  * Splits an {@link AsyncStream} into {@link AsyncStream} of {@link AsyncStream}
@@ -13,42 +13,44 @@ import { zero } from '../zero'
  * @return {(fa: AsyncStream<A>) => AsyncStream<AsyncStream<A>>} A function that
  * takes an async stream and returns an async stream of async streams of given
  * chunks.
- * 
+ *
  * @__PURE__
  */
 export function chunksOf(n: number) {
-  /**
-   * Takes an {@link AsyncStream} to produce chunks of previously given number.
-   *
-   * @template A The value type.
-   * @param {AsyncStream<A>} fa The input async stream.
-   * @return {AsyncStream<AsyncStream<A>>} The output async stream.
-   * 
-   * @__PURE__
-   */
-  return function _chunksOf<A>(fa: AsyncStream<A>): AsyncStream<AsyncStream<A>> {
-    if (n <= 0) return of(fa)
+	/**
+	 * Takes an {@link AsyncStream} to produce chunks of previously given number.
+	 *
+	 * @template A The value type.
+	 * @param {AsyncStream<A>} fa The input async stream.
+	 * @return {AsyncStream<AsyncStream<A>>} The output async stream.
+	 *
+	 * @__PURE__
+	 */
+	return function _chunksOf<A>(
+		fa: AsyncStream<A>,
+	): AsyncStream<AsyncStream<A>> {
+		if (n <= 0) return of(fa);
 
-    return async function* __chunksOf() {
-      const gen = fa()
+		return async function* __chunksOf() {
+			const gen = fa();
 
-      let step = await gen.next()
-      let isActive = !step.done
-      while (isActive) {
-        let remaining = n
-        yield async function* _step() {
-          while (--remaining >= 0) {
-            yield step.value
-            step = await gen.next()
-            if (step.done) {
-              isActive = false
-              return
-            }
-          }
-        }
-      }
-    }
-  }
+			let step = await gen.next();
+			let isActive = !step.done;
+			while (isActive) {
+				let remaining = n;
+				yield async function* _step() {
+					while (--remaining >= 0) {
+						yield step.value;
+						step = await gen.next();
+						if (step.done) {
+							isActive = false;
+							return;
+						}
+					}
+				};
+			}
+		};
+	};
 }
 
 /**
@@ -60,43 +62,43 @@ export function chunksOf(n: number) {
  * @return {(fa: AsyncStream<A>) => AsyncStream<A[]>} A function that
  * takes an async stream and returns an async stream of array of given
  * chunks.
- * 
+ *
  * @__PURE__
  */
 export function arrayChunksOf(n: number) {
-  /**
-   * Takes an {@link AsyncStream} to produce chunks of previously given number.
-   *
-   * @template A The value type.
-   * @param {AsyncStream<A>} fa The input async stream.
-   * @return {AsyncStream<A[]>} The output async stream.
-   * 
-   * @__PURE__
-   */
-  return function _arrayChunksOf<A>(fa: AsyncStream<A>): AsyncStream<A[]> {
-    if (n <= 0) return of([])
+	/**
+	 * Takes an {@link AsyncStream} to produce chunks of previously given number.
+	 *
+	 * @template A The value type.
+	 * @param {AsyncStream<A>} fa The input async stream.
+	 * @return {AsyncStream<A[]>} The output async stream.
+	 *
+	 * @__PURE__
+	 */
+	return function _arrayChunksOf<A>(fa: AsyncStream<A>): AsyncStream<A[]> {
+		if (n <= 0) return of([]);
 
-    return async function* __arrayChunksOf() {
-      const gen = fa()
+		return async function* __arrayChunksOf() {
+			const gen = fa();
 
-      let current: A[] = new Array(n)
-      while (true) {
-        for (let i = 0; i < n; ++i) {
-          const { value, done } = await gen.next()
-          if (done) {
-            current.splice(i)
-            yield current
-            return
-          }
+			let current: A[] = new Array(n);
+			while (true) {
+				for (let i = 0; i < n; ++i) {
+					const { value, done } = await gen.next();
+					if (done) {
+						current.splice(i);
+						yield current;
+						return;
+					}
 
-          current[ i ] = value
-        }
+					current[i] = value;
+				}
 
-        yield current
-        current = new Array(n)
-      }
-    }
-  }
+				yield current;
+				current = new Array(n);
+			}
+		};
+	};
 }
 
 /**
@@ -108,26 +110,28 @@ export function arrayChunksOf(n: number) {
  * @return {(fa: AsyncStream<A>) => AsyncStream<Stream<A>>} A function that
  * takes an async stream and returns an async stream of streams of given
  * chunks.
- * 
+ *
  * @__PURE__
  */
 export function streamChunksOf(n: number) {
-  /**
-   * Takes an {@link AsyncStream} to produce chunks of previously given number.
-   *
-   * @template A The value type.
-   * @param {AsyncStream<A>} fa The input async stream.
-   * @return {AsyncStream<Stream<A>>} The output async stream.
-   * 
-   * @__PURE__
-   */
-  return function _streamChunksOf<A>(fa: AsyncStream<A>): AsyncStream<Stream<A>> {
-    if (n <= 0) return zero<Stream<A>>()
+	/**
+	 * Takes an {@link AsyncStream} to produce chunks of previously given number.
+	 *
+	 * @template A The value type.
+	 * @param {AsyncStream<A>} fa The input async stream.
+	 * @return {AsyncStream<Stream<A>>} The output async stream.
+	 *
+	 * @__PURE__
+	 */
+	return function _streamChunksOf<A>(
+		fa: AsyncStream<A>,
+	): AsyncStream<Stream<A>> {
+		if (n <= 0) return zero<Stream<A>>();
 
-    return async function* __streamChunksOf() {
-      for await (const array of arrayChunksOf(n)(fa)()) {
-        yield fromIterable(array)
-      }
-    }
-  }
+		return async function* __streamChunksOf() {
+			for await (const array of arrayChunksOf(n)(fa)()) {
+				yield fromIterable(array);
+			}
+		};
+	};
 }
