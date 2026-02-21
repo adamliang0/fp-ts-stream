@@ -9,3 +9,4 @@ CLAUDE.md
 .claude
 .rslib
 .vscode/coverage
+fp-ts-stream-*.tgz
