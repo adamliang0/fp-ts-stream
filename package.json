@@ -47,8 +47,6 @@
 		"@rslib/core": "^0.18.0",
 		"@typescript/native-preview": "^7.0.0-dev.20251119.1",
 		"@vitest/coverage-v8": "4.0.10",
-		"husky": "^9.1.7",
-		"release-it": "*",
 		"typescript": "5.9.3",
 		"vitest": "^4.0.10"
 	},
