@@ -2,7 +2,7 @@
 
 This section covers various ways to construct an `AsyncStream`.
 
-### From Iterables
+## From Iterables
 
 **`fromIterable<A>(iterable: Iterable<A>): AsyncStream<A>`**
 

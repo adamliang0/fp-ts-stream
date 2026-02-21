@@ -267,4 +267,3 @@ const purchases = S.fromIterable([
 const histogram = pipe(purchases, S.countBy((p) => p.userId))
 // { a: 2, b: 1 }
 ```
-

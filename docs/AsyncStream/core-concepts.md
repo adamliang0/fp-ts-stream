@@ -1,6 +1,6 @@
 # Core Concepts
 
-### Lazy Evaluation
+## Lazy Evaluation
 
 Streams are not materialized until consumed. When you create a stream or apply transformations, you're building up a description of computation, not executing it:
 

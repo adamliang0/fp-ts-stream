@@ -2,7 +2,7 @@
 
 Once a stream is defined, it must be consumed to produce values. This section describes various ways to consume an `AsyncStream`.
 
-### Converting to Arrays
+## Converting to Arrays
 
 **`toArray<A>(fa: AsyncStream<A>): Promise<Array<A>>`**
 

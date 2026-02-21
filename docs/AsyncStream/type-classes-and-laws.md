@@ -2,7 +2,7 @@
 
 `AsyncStream` implements several key type classes from functional programming, each with a set of laws that guarantee its behavior. These laws are fundamental to writing predictable and correct functional code.
 
-### Pointed
+## Pointed
 
 The `Pointed` type class provides the ability to lift a value into the `AsyncStream` context.
 
@@ -18,6 +18,7 @@ const values = await AS.toArray(single) // [42]
 ```
 
 **Laws**:
+
 - Identity: `$map(f, of(a)) \equiv of(f(a))$`
 
 ### Functor
@@ -46,6 +47,7 @@ const asyncDoubled = pipe(numbers, AS.map(async n => {
 Like `map`, but provides the index of each element.
 
 **Laws**:
+
 - Identity: `$map(identity, fa) \equiv fa$`
 - Composition: `$map(compose(f, g), fa) \equiv map(f, map(g, fa))$`
 
@@ -74,6 +76,7 @@ const expanded = pipe(
 Like `chain`, but provides the index.
 
 **Laws**:
+
 - Left identity: `$chain(f, of(a)) \equiv f(a)$`
 - Right identity: `$chain(of, fa) \equiv fa$`
 - Associativity: `$chain(f, chain(g, fa)) \equiv chain(a => chain(f, g(a)), fa)$`
@@ -100,6 +103,7 @@ const applied = pipe(functions, AS.ap(numbers))
 ```
 
 **Laws**:
+
 - Identity: `$ap(of(identity), fa) \equiv fa$`
 - Homomorphism: `$ap(of(f), of(a)) \equiv of(f(a))$`
 - Interchange: `$ap(fab, of(a)) \equiv ap(of(f => f(a)), fab)$`

@@ -2,7 +2,7 @@
 
 This section explores advanced compositional patterns for `AsyncStream`.
 
-### Do Notation
+## Do Notation
 
 Do notation provides a convenient syntax for monadic composition, allowing you to bind multiple computations together:
 

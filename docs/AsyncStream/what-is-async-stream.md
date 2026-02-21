@@ -2,7 +2,7 @@
 
 `AsyncStream` is a functional abstraction for representing asynchronous sequences of values. At its core, it is a **lazy, composable effect type** that models potentially infinite streams of data that may be produced asynchronously.
 
-### Type Definition
+## Type Definition
 
 An `AsyncStream<A>` is defined as a function that returns an `AsyncGenerator<A>`:
 

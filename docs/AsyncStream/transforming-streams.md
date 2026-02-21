@@ -2,7 +2,7 @@
 
 This section details the rich API for transforming `AsyncStream` instances.
 
-### Functor Operations
+## Functor Operations
 
 **`map<A, B>(f: (a: A) => B | Promise<B>): (fa: AsyncStream<A>) => AsyncStream<B>`**
 

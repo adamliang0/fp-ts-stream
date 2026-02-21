@@ -2,7 +2,7 @@
 
 This section provides practical examples of `AsyncStream` in action.
 
-### Basic Stream Processing
+## Basic Stream Processing
 
 ```typescript
 import * as AS from "fp-ts-stream/AsyncStream"
@@ -38,7 +38,7 @@ async function fetchPage(page: number): Promise<Array<Item>> {
 async function* paginatedItems(): AsyncGenerator<Item> {
   let page = 1
   let hasMore = true
-  
+
   while (hasMore) {
     const items = await fetchPage(page)
     if (items.length === 0) {
@@ -76,17 +76,17 @@ declare function parseLine(line: string): Either<Error, any>;
 async function* readLines(filePath: string): AsyncGenerator<string> {
   const fileStream = createReadStream(filePath, { encoding: "utf-8" })
   let buffer = ""
-  
+
   for await (const chunk of fileStream) {
     buffer += chunk
     const lines = buffer.split("\n")
     buffer = lines.pop() || ""
-    
+
     for (const line of lines) {
       yield line
     }
   }
-  
+
   if (buffer) {
     yield buffer
   }
