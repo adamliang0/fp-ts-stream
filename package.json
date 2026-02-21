@@ -12,6 +12,26 @@
 				"types": "./dist/index.d.ts",
 				"default": "./dist/index.mjs"
 			}
+		},
+		"Stream": {
+			"require": {
+				"types": "./dist/Stream.d.ts",
+				"default": "./dist/Stream.js"
+			},
+			"import": {
+				"types": "./dist/Stream.d.ts",
+				"default": "./dist/Stream.mjs"
+			}
+		},
+		"AsyncStream": {
+			"require": {
+				"types": "./dist/AsyncStream.d.ts",
+				"default": "./dist/AsyncStream.js"
+			},
+			"import": {
+				"types": "./dist/AsyncStream.d.ts",
+				"default": "./dist/AsyncStream.mjs"
+			}
 		}
 	},
 	"types": "dist/index.d.ts",
