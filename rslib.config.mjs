@@ -19,7 +19,7 @@ export default {
 	],
 	input: "src/index.ts",
 	source: {
-		tsconfigPath: "./tsconfig.json",
+		tsconfigPath: "./tsconfig.app.json",
 	},
 	output: {
 		target: "web",

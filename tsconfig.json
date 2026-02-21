@@ -1,14 +1,11 @@
 {
-	"extends": "./tsconfig.base.json",
-	"compilerOptions": {
-		"declaration": true,
-		"declarationMap": true,
-		"outDir": "dist",
-		"paths": {
-			"@/*": ["./src/*"]
+	"files": [],
+	"references": [
+		{
+			"path": "./tsconfig.node.json"
 		},
-		"composite": true
-	},
-	"include": ["./src"],
-	"exclude": ["dist", "node_modules", "**/*.test.ts", "**/*.spec.ts"]
+		{
+			"path": "./tsconfig.app.json"
+		}
+	]
 }

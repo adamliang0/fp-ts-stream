@@ -1,0 +1,15 @@
+{
+	"compilerOptions": {
+		"module": "ESNext",
+		"target": "esnext",
+		"noEmit": false,
+		"jsx": "preserve",
+		"lib": ["esnext"],
+		"moduleResolution": "bundler",
+		"paths": {
+			"@/*": ["./src/*"]
+		}
+	},
+	"include": ["tests", "*.ts", "scripts"],
+	"exclude": ["dist", "node_modules"]
+}
