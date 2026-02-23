@@ -35,7 +35,7 @@
 		"dev": "rslib build --watch",
 		"lint": "biome check .",
 		"lint:fix": "biome check . --write",
-		"prepare": "bunx rslib build"
+		"prepare": "npx rslib build"
 	},
 	"repository": {
 		"type": "git",
@@ -47,9 +47,7 @@
 		"url": "https://github.com/adamliang0/fp-ts-stream/issues"
 	},
 	"homepage": "https://github.com/adamliang0/fp-ts-stream#readme",
-	"peerDependencies": {
-		"fp-ts": "^2.16.11"
-	},
+	"peerDependencies": {},
 	"devDependencies": {
 		"@biomejs/biome": "^2.3.6",
 		"@microsoft/api-extractor": "^7.55.0",

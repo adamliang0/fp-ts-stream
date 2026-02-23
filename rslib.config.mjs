@@ -6,7 +6,14 @@ export default {
       format: "esm",
       syntax: "es2022",
       autoExternal: true,
-      dts: { bundle: false, tsgo: true },
+      bundle: true,
+      dts: { bundle: true, tsgo: true },
+    },
+    {
+      format: "cjs",
+      syntax: "es2022",
+      autoExternal: true,
+      bundle: true,
     },
   ],
   source: {
@@ -27,5 +34,5 @@ export default {
     },
   },
   plugins: [pluginNodePolyfill()],
-  external: ["fp-ts/*"],
+  external: [/^fp-ts(\/|$)/],
 };
