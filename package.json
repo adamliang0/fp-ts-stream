@@ -2,31 +2,21 @@
 	"name": "fp-ts-stream",
 	"version": "0.1.21",
 	"description": "A library providing async and sync streams for fp-ts.",
+	"files": [
+		"dist/**"
+	],
 	"exports": {
 		"Stream": {
-			"require": {
-				"types": "./dist/Stream.d.ts",
-				"default": "./dist/Stream.js"
-			},
-			"import": {
-				"types": "./dist/Stream.d.ts",
-				"default": "./dist/Stream.mjs"
-			}
+			"import": "./dist/Stream.mjs",
+			"types": "./dist/Stream.d.ts",
+			"require": "./dist/Stream.js"
 		},
 		"AsyncStream": {
-			"require": {
-				"types": "./dist/AsyncStream.d.ts",
-				"default": "./dist/AsyncStream.js"
-			},
-			"import": {
-				"types": "./dist/AsyncStream.d.ts",
-				"default": "./dist/AsyncStream.mjs"
-			}
+			"import": "./dist/AsyncStream.mjs",
+			"types": "./dist/AsyncStream.d.ts",
+			"require": "./dist/AsyncStream.js"
 		}
 	},
-	"types": "dist/index.d.ts",
-	"module": "dist/index.mjs",
-	"main": "dist/index.js",
 	"sideEffects": false,
 	"scripts": {
 		"test": "vitest run",
